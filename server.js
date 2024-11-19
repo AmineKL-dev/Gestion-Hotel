@@ -1,5 +1,5 @@
-import mysql from "mysql";
-import express from "express";
+import mysql from "mysql2";
+import express, { query } from "express";
 
 const app = express();
 const port = 3000;
@@ -9,7 +9,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "aminesql",
-  database: "Hoteldb", 
+  database: "hoteldb", 
 });
 
 // Connect to the database
@@ -24,6 +24,20 @@ db.connect((err) => {
 // Set up a test route
 app.get("/", (req, res) => {
   res.send("Welcome to the Express Server!");
+});
+app.get("/chambre/:N?", (req, res) => {
+  const {N}=req.params;
+  const query = N
+    ? `SELECT * FROM chambre WHERE N_chambre =${N}`
+    : "SELECT * FROM chambre";
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Erreur lors de l'exécution de la requête :", err);
+      res.status(500).send("Erreur serveur");
+      return;
+    }
+    res.json(results); // Retourne les données au format JSON
+  });
 });
 
 // Start the Express server
