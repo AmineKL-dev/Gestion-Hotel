@@ -1,8 +1,8 @@
-import mysql from "mysql2";
+import mysql from "mysql";
 import express from "express";
 
 const app = express();
-const port = 3306;
+const port = 3000;
 
 // Create connection
 const db = mysql.createConnection({
