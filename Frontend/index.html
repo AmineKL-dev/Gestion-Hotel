@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+ <div id="chambres">
+    <form id="addForm">
+        <label for="N_chambre">Room Number:</label>
+        <input type="number" id="N_chambre" name="N_chambre" required><br>
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" required><br>
+        <label for="prix">Price:</label>
+        <input type="number" id="prix" name="prix" required><br>
+        <button type="submit">Add Chambre</button>
+    
+    </form>
+    
+    <form id="getForm">
+        <h2>Get chambre</h2>
+        <label for="roomNumber">Enter ID:</label>
+        <input type="number" id="roomNumber" name="roomNumber" required>
+        <br>
+        <div class="btm-container">
+            <button type="submit">Send GET Request</button>
+            <div id="getResult"></div>
+        </div> 
+    </form>
+   <form id="getallForm">
+       <h2>Get all chambres</h2><br>
+       <div class="btm">
+           <button type="submit">Send all chambres</button>
+           <div id="getallResult"></div>
+       </div>
+       
+   </form>
+
+
+ </div>
+</body>
+ <!-- Script -->
+ <script src="script.js"></script>

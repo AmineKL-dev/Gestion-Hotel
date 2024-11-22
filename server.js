@@ -1,9 +1,10 @@
 import mysql from "mysql2";
 import express, { query } from "express";
+import cors from "cors"
 
 const app = express();
 const port = 3000;
-
+app.use(cors());
 // Create connection
 const db = mysql.createConnection({
   host: "localhost",
@@ -39,6 +40,21 @@ app.get("/chambre/:N?", (req, res) => {
     res.json(results); // Retourne les données au format JSON
   });
 });
+app.post("/chambre",(req,res)=>{
+  const {num,type,prix}=req.body
+  if(!num ||!type ||!prix){
+    return res.status(400).send({error:"you must enter these information"})
+  }
+  const query = 'INSERT INTO chambre (num, type, prix) VALUES (?, ?, ?)';
+    db.query(query, [num,type,prix], (err, result) => {
+        if (err) {
+            console.error('Error executing query:', err.message);
+            return res.status(500).send({ error: 'Database error' });
+        }
+        res.status(201).send({ message: 'User added successfully', id: result.insertId });
+    });
+});
+
 
 // Start the Express server
 app.listen(port, () => {
